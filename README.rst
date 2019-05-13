@@ -21,7 +21,19 @@ Usage
 
   import darksearch
 
-  results = darksearch.search("query")
+  """
+  `headers` and `proxies` are optional
+  proxies = {
+      "http": "http://127.0.0.1:8080"
+  }
+  headers = {
+      "User-Agent": "Chrome/57.0.2987.133"
+  }
+  """
+
+  client = darksearch.Client(headers=None, proxies=None)
+
+  results = client.search("query")
 
   """
   `results` is a JSON dict object like this
@@ -42,7 +54,7 @@ Usage
  }
   """
 
-  results_page_2 = darksearch.search("query", page=2)
+  results_page_2 = client.search("query", page=2)
 
   """
   `results_page_2` is a JSON dict object like this
@@ -63,7 +75,7 @@ Usage
  }
   """
 
-  results_pages = darksearch.search("query", pages=2)
+  results_pages = client.search("query", pages=2)
 
   """
   `results_pages` is a list of JSON dict objects like this
@@ -87,7 +99,7 @@ Usage
   ]
   """
 
-  results_pages = darksearch.search("query", pages=2, wait=2)
+  results_pages = client.search("query", pages=2, wait=2)
 
   """
   `wait` is the seconds between requests (DarkSearch's API is limited to 30 requests per minute.)
@@ -110,12 +122,6 @@ Usage
   },
   ...
   ]
-  """
-
-  status = darksearch.crawling_status()
-
-  """
-  Number of pages indexed
   """
 
 *******

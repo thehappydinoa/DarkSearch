@@ -1,20 +1,22 @@
-from darksearch import crawling_status, search
+from darksearch import Client
+
+client = Client()
 
 
 def test_search_page_1():
-    response = search("query")
+    response = client.search("query")
     assert isinstance(response, dict)
     assert response.get("current_page") == 1
 
 
 def test_search_page_2():
-    response = search("query", page=2)
+    response = client.search("query", page=2)
     assert isinstance(response, dict)
     assert response.get("current_page") == 2
 
 
 def test_search_2_pages():
-    response = search("query", pages=2)
+    response = client.search("query", pages=2)
     assert isinstance(response, list)
     assert len(response) == 2
     response_1, response_2 = response
@@ -25,7 +27,7 @@ def test_search_2_pages():
 
 
 def test_search_2_pages_wait():
-    response = search("query", pages=2, wait=2)
+    response = client.search("query", pages=2, wait=2)
     assert isinstance(response, list)
     assert len(response) == 2
     response_1, response_2 = response
@@ -36,11 +38,12 @@ def test_search_2_pages_wait():
 
 
 def test_search_last_page():
-    response = search("super_specific_search_page_no_one_will_create", pages=5)
+    response = client.search(
+        "super_specific_search_page_no_one_will_create", pages=5)
     assert isinstance(response, list)
     assert len(response) == 1
 
-
-def test_crawling_status():
-    response = int(crawling_status())
-    assert isinstance(response, int)
+# DEBUG: Hitting me with a 504 Gateway Time-out
+# def test_crawling_status():
+#     response = client.crawling_status()
+#     assert isinstance(response, int)
