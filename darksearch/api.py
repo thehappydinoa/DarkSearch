@@ -73,7 +73,10 @@ def search(query, **kwargs):
         results = list()
         try:
             for page_i in range(pages):
-                results.append(api_search(query, page_i + 1))
+                response = api_search(query, page_i + 1)
+                results.append(response)
+                if response.get("last_page") <= page_i + 1:
+                    break
                 if wait:
                     time.sleep(wait)
         except DarkSearchQuotaExceed:
