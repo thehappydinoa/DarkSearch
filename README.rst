@@ -1,6 +1,7 @@
 ==========
 DarkSearch
 ==========
+.. image:: https://travis-ci.com/thehappydinoa/DarkSearch.svg?branch=master
 
 Python API wrapper for `darksearch.io <https://darksearch.io/>`_
 
