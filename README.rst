@@ -111,3 +111,9 @@ Usage
   ...
   ]
   """
+
+  status = darksearch.crawling_status()
+
+  """
+  Number of pages indexed
+  """

@@ -11,7 +11,7 @@ except ImportError:
     JSONDecodeError = ValueError
 
 
-def api_request(path, base_url="https://darksearch.io", params=None):
+def api_request(path, base_url="https://darksearch.io", params=None, json=True):
     """
     :param path: Path to be requested
     :param base_url: Base URL to be combined with the path
@@ -26,9 +26,11 @@ def api_request(path, base_url="https://darksearch.io", params=None):
         response = requests.get(base_url + path, params=params)
         if response.status_code == 404:
             raise DarkSearchPageNotFound
-        elif response.status_code == 429:
+        if response.status_code == 429:
             raise DarkSearchQuotaExceed
-        return response.json()
+        if json:
+            return response.json()
+        return response.content
     except requests.exceptions.RequestException:
         raise DarkSearchRequestException
     except JSONDecodeError:
@@ -78,6 +80,14 @@ def search(query, **kwargs):
             warnings.warn(
                 "Seach Quota Exceeded, please keep searches to less than 30 per minute")
         return results
-    elif not page:
+    if not page:
         page = 1
     return api_search(query, page)
+
+
+def crawling_status():
+    """
+    :return: crawling_status
+    :rtype: int
+    """
+    return api_request("/api/crawling_status", json=False)
