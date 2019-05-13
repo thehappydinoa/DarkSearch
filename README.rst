@@ -117,3 +117,11 @@ Usage
   """
   Number of pages indexed
   """
+
+*******
+Testing
+*******
+
+.. code-block:: bash
+
+  pytest
