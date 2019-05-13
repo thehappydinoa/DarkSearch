@@ -1,16 +1,29 @@
-import json
+import time
+import warnings
 
 import requests
 
 from .exceptions import *
 
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
-def api_request(path, base_url="https://darksearch.io", timeout=10, params=None):
+
+def api_request(path, base_url="https://darksearch.io", params=None):
+    """
+    :param path: Path to be requested
+    :param base_url: Base URL to be combined with the path
+    :param params: Base URL to be combined with the path
+    :type path: str
+    :type base_url: str
+    :type params: dict
+    :return: JSON Response
+    :rtype: dict
+    """
     try:
-        if params:
-            response = requests.get(base_url + path, timeout=timeout, params=params)
-        else:
-            response = requests.get(base_url + path, timeout=timeout)
+        response = requests.get(base_url + path, params=params)
         if response.status_code == 404:
             raise DarkSearchPageNotFound
         elif response.status_code == 429:
@@ -18,9 +31,53 @@ def api_request(path, base_url="https://darksearch.io", timeout=10, params=None)
         return response.json()
     except requests.exceptions.RequestException:
         raise DarkSearchRequestException
-    except json.decoder.JSONDecodeError as error:
+    except JSONDecodeError:
+        print(response.content)
         raise DarkSearchJSONDecodeException
 
 
-def search(query, page=1):
+def api_search(query, page):
+    """
+    :param query: Query to be searched
+    :param page: Page number of the search
+    :type query: str
+    :type page: int
+    :return: search results
+    :rtype: dict
+    """
+    if page < 1:
+        page = 1
     return api_request("/api/search", params={"query": query, "page": page})
+
+
+def search(query, **kwargs):
+    """
+    :param query: Query to be searched
+    :param page: Page number of the search
+    :param pages: Pages to be returned
+    :param wait: Time to wait between requests
+    :type query: str
+    :type page: int
+    :type pages: int
+    :type wait: int
+    :return: search results
+    :rtype: list or dict
+    """
+    page = kwargs.get("page")
+    pages = kwargs.get("pages")
+    wait = kwargs.get("wait")
+
+    if pages and not page:
+        results = list()
+        try:
+            for page_i in range(pages):
+                results.append(api_search(query, page_i + 1))
+                if wait:
+                    time.sleep(wait)
+        except DarkSearchQuotaExceed:
+            warnings.warn(
+                "Seach Quota Exceeded, please keep searches to less than 30 per minute")
+        return results
+    elif not page:
+        page = 1
+    return api_search(query, page)
