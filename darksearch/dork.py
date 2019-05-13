@@ -11,13 +11,13 @@ class Dork(object):
         self.dorks = dorks
 
     def __str__(self):
-        return "{} {}".format(str(self.query), self.parse_dorks(self.dorks)).strip()
+        return "{0} {1}".format(str(self.query), self.parse_dorks(self.dorks)).strip()
 
     def combine_dorks(self, other):
         new_dorks = dict()
         for dorks in [self.dorks, other.dorks]:
             new_dorks.update((k, v)
-                             for k, v in dorks.iteritems() if v is not None)
+                             for k, v in dorks.items() if v is not None)
         return new_dorks
 
     def AND(self, other):
@@ -34,12 +34,12 @@ class Dork(object):
 
     @staticmethod
     def parse_condition(query_1, condition, query_2, dorks):
-        return "\"{}\" {} \"{}\" {}".format(query_1, condition, query_2, dorks)
+        return "\"{0}\" {1} \"{2}\" {3}".format(query_1, condition, query_2, dorks)
 
     @staticmethod
     def parse_dorks(dorks):
         dork_strings = list()
         for key, value in dorks.items():
             if value:
-                dork_strings.append("{}:\"{}\"".format(key, str(value)))
+                dork_strings.append("{0}:\"{1}\"".format(key, str(value)))
         return " ".join(dork_strings)
