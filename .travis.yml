@@ -1,12 +1,18 @@
-language: python
+language:   python
 
 python:
-  - "2.6"
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
+  - '2.6'
+  - '2.7'
+  - '3.4'
+  - '3.5'
+  - '3.6'
 
-install:  pip install -e .
+install:    pip install -e .
 
-script:   pytest
+script:     pytest
+
+deploy:
+  provider: pypi
+  user:     "thehappydinoa"
+  password:
+    secure: i4IXbDpPgvg48D2LWOw4p54w8wNu9v5eLEtLwMRmX6HWn0N1BKwgGDNOZ7rIJM/o5i8tRj+DSG5maF5EtvPDn6Wv9RWvqSr2bD2SzB4orNLsyrmFBbFzGc9sLgndThgvi/wnRSra+LmXuicdK3TwozwUz4SScBNt2bb7k4HBeU7SyD+tiCeXqS+0o0RA471kUqu2vSdpb4A0WSa6UgHB7tMiuJxjgFd9Kd7BIm7eHjIuwrhmeAp2wyOX2buGWOkP8q1NimQT3/aVXWapxKsFOFmdU93Go6gqaqjDlNQcRsX2X8TDACANByd0xQAgvSFb/D2bEKNTjIiJkRPRPcNcYWhTLRpFgnsAwlCyQcQrY7i+e9beciMkMpdDqAaUzJYpfMfUPrp4R/lEDvnvSE36cgpbzcS3iklYAtho6QB8hhVk0/M9bNdGJ3MSFCC/e5m66007ufNK+scWMuYpQFjn+RzXNoUQEGQ/TDeKbMVBGaD4AZXcNZhTl7mcIc1cqc6W2nG7qSzN4avpCfexft/LCxKFcMRFPdYJDrfdCaSttcvXPuoZmGaiIiUEujSkyfjvLqKtJ/hwGEYQH9hQMXLtLCMmeSn4JE7e5f/q1yodohAWB8VWnvHQzCJ4U3J5CusA5a8g/cJRwDZSxSCA4kVOxjO1Fmx4wtxmqCZC9/xQAiY=
