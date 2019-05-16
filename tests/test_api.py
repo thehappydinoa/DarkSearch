@@ -1,6 +1,6 @@
 from darksearch import Client
 
-client = Client()
+client = Client(timeout=10)
 
 
 def test_search_page_1():
@@ -43,7 +43,7 @@ def test_search_last_page():
     assert isinstance(response, list)
     assert len(response) == 1
 
-# DEBUG: Hitting me with a 504 Gateway Time-out
-# def test_crawling_status():
-#     response = client.crawling_status()
-#     assert isinstance(response, int)
+
+def test_crawling_status():
+    response = client.crawling_status()
+    assert isinstance(response, int)

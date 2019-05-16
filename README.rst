@@ -22,7 +22,8 @@ Usage
   import darksearch
 
   """
-  `headers` and `proxies` are optional
+  `timeout`, `headers`, and `proxies`  are optional
+  timeout = 10
   proxies = {
       "http": "http://127.0.0.1:8080"
   }
@@ -31,7 +32,7 @@ Usage
   }
   """
 
-  client = darksearch.Client(headers=None, proxies=None)
+  client = darksearch.Client(timeout=30, headers=None, proxies=None)
 
   results = client.search("query")
 
@@ -54,10 +55,10 @@ Usage
  }
   """
 
-  results_page_2 = client.search("query", page=2)
+  results = client.search("query", page=2)
 
   """
-  `results_page_2` is a JSON dict object like this
+  `results` is a JSON dict object like this
   {
     "total": int,
     "per_page": int,
@@ -75,10 +76,10 @@ Usage
  }
   """
 
-  results_pages = client.search("query", pages=2)
+  results = client.search("query", pages=2)
 
   """
-  `results_pages` is a list of JSON dict objects like this
+  `results` is a list of JSON dict objects like this
   [
   {
     "total": int,
@@ -99,11 +100,11 @@ Usage
   ]
   """
 
-  results_pages = client.search("query", pages=2, wait=2)
+  results = client.search("query", pages=2, wait=2)
 
   """
   `wait` is the seconds between requests (DarkSearch's API is limited to 30 requests per minute.)
-  `results_pages` is a list of JSON dict objects
+  `results` is a list of JSON dict objects
   [
   {
     "total": int,
@@ -122,6 +123,12 @@ Usage
   },
   ...
   ]
+  """
+
+  crawling_status = darksearch.crawling_status()
+
+  """
+  `crawling_status` is a integer of pages that have been indexed
   """
 
 *******

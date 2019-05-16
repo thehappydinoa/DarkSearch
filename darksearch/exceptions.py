@@ -10,6 +10,10 @@ class DarkSearchQuotaExceed(DarkSearchException):
     pass
 
 
+class DarkSearchServerError(DarkSearchException):
+    pass
+
+
 class DarkSearchRequestException(DarkSearchException):
     pass
 

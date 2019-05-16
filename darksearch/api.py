@@ -12,8 +12,9 @@ except ImportError:
 
 
 class Client(object):
-    def __init__(self, base_url="https://darksearch.io", headers=None, proxies=None):
+    def __init__(self, base_url="https://darksearch.io", timeout=30, headers=None, proxies=None):
         self.base_url = base_url
+        self.timeout = timeout
         self.headers = headers
         self.proxies = proxies
 
@@ -30,11 +31,13 @@ class Client(object):
         """
         try:
             response = requests.get(
-                self.base_url + path, params=params, headers=self.headers, proxies=self.proxies)
+                self.base_url + path, timeout=self.timeout, params=params, headers=self.headers, proxies=self.proxies)
             if response.status_code == 404:
                 raise DarkSearchPageNotFound
             if response.status_code == 429:
                 raise DarkSearchQuotaExceed
+            if response.status_code == 504:
+                raise DarkSearchServerError
             if json:
                 return response.json()
             return response.content
