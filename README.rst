@@ -14,6 +14,19 @@ Install
 
   pip install darksearch
 
+***
+CLI
+***
+.. code-block:: bash
+
+  darksearch --query "query" --page 1
+
+  darksearch --query "query" --pages 2
+
+  darksearch --query "query" --pages 2 --wait 2
+
+  darksearch --query "query" --json
+
 *****
 Usage
 *****
@@ -130,6 +143,8 @@ Usage
   """
   `crawling_status` is a integer of pages that have been indexed
   """
+
+`Proxies <https://2.python-requests.org//en/latest/user/advanced/#proxies>`_
 
 *******
 Testing
