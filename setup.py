@@ -10,7 +10,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name='DarkSearch',
-    version='1.5.0',
+    version='1.5.1',
     packages=['darksearch'],
     url='https://github.com/thehappydinoa/DarkSearch',
     license='MIT',
@@ -38,7 +38,6 @@ setup(
         'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
