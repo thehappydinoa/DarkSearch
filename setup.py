@@ -10,7 +10,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 
 setup(
     name='DarkSearch',
-    version='1.4.1',
+    version='1.5.0',
     packages=['darksearch'],
     url='https://github.com/thehappydinoa/DarkSearch',
     license='MIT',
@@ -19,8 +19,12 @@ setup(
     description='Python API wrapper for darksearch.io',
     long_description=long_description,
     install_requires=[
-        "requests"
+        "requests",
+        "pprint"
     ],
+    entry_points={
+        'console_scripts': ['darksearch=darksearch.cli:main'],
+    },
 
     classifiers=[
         #   3 - Alpha
