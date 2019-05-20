@@ -3,7 +3,18 @@ import warnings
 
 import requests
 
-from .exceptions import *
+from .exceptions import (
+    DarkSearchJSONDecodeException,
+    DarkSearchPageNotFound,
+    DarkSearchQuotaExceed,
+    DarkSearchRequestException,
+    DarkSearchServerError,
+)
+
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 
 try:
     from json.decoder import JSONDecodeError
@@ -12,14 +23,34 @@ except ImportError:
 
 
 class Client(object):
-    def __init__(self, base_url="https://darksearch.io", timeout=30, headers=None, proxies=None):
+    """Client object for DarkSearch API."""
+
+    def __init__(
+        self,
+        base_url="https://darksearch.io",
+        timeout=30,
+        headers=None,
+        proxies=None,
+    ):
+        """Initialize this client with the given parameters.
+
+        :param base_url: Base URL for the API
+        :param timeout: Timeout for the requests
+        :param headers: Headers for the request
+        :param proxies: Proxies configuration
+        :type base_url: str
+        :type timeout: int
+        :type headers: dict
+        :type proxies: dict
+        """
         self.base_url = base_url
         self.timeout = timeout
         self.headers = headers
         self.proxies = proxies
 
     def api_request(self, path, params=None, json=True):
-        """
+        """Perform an API request to DarkSearch.
+
         :param path: Path to be requested
         :param base_url: Base URL to be combined with the path
         :param params: Base URL to be combined with the path
@@ -31,24 +62,35 @@ class Client(object):
         """
         try:
             response = requests.get(
-                self.base_url + path, timeout=self.timeout, params=params, headers=self.headers, proxies=self.proxies)
+                urljoin(self.base_url, path),
+                timeout=self.timeout,
+                params=params,
+                headers=self.headers,
+                proxies=self.proxies,
+            )
+
             if response.status_code == 404:
                 raise DarkSearchPageNotFound
-            if response.status_code == 429:
+            elif response.status_code == 429:
                 raise DarkSearchQuotaExceed
-            if response.status_code == 504:
+            elif response.status_code == 504:
                 raise DarkSearchServerError
+
             if json:
                 return response.json()
+
             return response.content
+
         except requests.exceptions.RequestException:
             raise DarkSearchRequestException
+
         except JSONDecodeError:
             print(response.content)
             raise DarkSearchJSONDecodeException
 
     def api_search(self, query, page):
-        """
+        """Perform low level search with the API.
+
         :param query: Query to be searched
         :param page: Page number of the search
         :type query: str
@@ -56,12 +98,16 @@ class Client(object):
         :return: search results
         :rtype: dict
         """
+
         if page < 1:
             page = 1
-        return self.api_request("/api/search", params={"query": query, "page": page})
+        return self.api_request(
+            "/api/search", params={"query": query, "page": page}
+        )
 
     def search(self, query, **kwargs):
-        """
+        """Perform search with the API.
+
         :param query: Query to be searched
         :param page: Page number of the search
         :param pages: Pages to be returned
@@ -89,14 +135,17 @@ class Client(object):
                         time.sleep(wait)
             except DarkSearchQuotaExceed:
                 warnings.warn(
-                    "Seach Quota Exceeded, please keep searches to less than 30 per minute")
+                    "Seach Quota Exceeded, please keep searches to less than "
+                    "30 per minute"
+                )
             return results
         if not page:
             page = 1
         return self.api_search(query, page)
 
     def crawling_status(self):
-        """
+        """Return the number of indexed pages in DarkSearch.
+
         :return: crawling_status
         :rtype: int
         """
