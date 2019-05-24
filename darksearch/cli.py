@@ -1,7 +1,7 @@
 import argparse
 from pprint import pprint
 
-from darksearch import Client
+from .api import Client
 
 
 def encode(source):

@@ -11,6 +11,19 @@ except ImportError:
     JSONDecodeError = ValueError
 
 
+def lookahead(iterable):
+    """Pass through all values from the given iterable, augmented by the
+    information if there are more values to come after the current one
+    (True), or if it is the last value (False).
+    """
+    it = iter(iterable)
+    last = next(it)
+    for val in it:
+        yield last, True
+        last = val
+    yield last, False
+
+
 class Client(object):
     def __init__(self, base_url="https://darksearch.io", timeout=30, headers=None, proxies=None):
         self.base_url = base_url
@@ -80,12 +93,12 @@ class Client(object):
         if pages and not page:
             results = list()
             try:
-                for page_i in range(pages):
+                for page_i, has_more in lookahead(range(pages)):
                     response = self.api_search(query, page_i + 1)
                     results.append(response)
                     if response.get("last_page") <= page_i + 1:
                         break
-                    if wait:
+                    if wait and has_more:
                         time.sleep(wait)
             except DarkSearchQuotaExceed:
                 warnings.warn(
