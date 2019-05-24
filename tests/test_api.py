@@ -30,7 +30,7 @@ def test_search_2_pages():  # noqa: D103
 
 def test_search_2_pages_wait():  # noqa: D103
     start = datetime.datetime.now()
-    response = client.search("query", pages=2, wait=2)
+    response = client.search("query", pages=2, wait=10)
     end = datetime.datetime.now()
     elapsed = end - start
     assert isinstance(response, list)
@@ -40,7 +40,7 @@ def test_search_2_pages_wait():  # noqa: D103
     assert response_1.get("current_page") == 1
     assert isinstance(response_2, dict)
     assert response_2.get("current_page") == 2
-    assert elapsed.seconds >= 1
+    assert elapsed.seconds >= 10
 
 
 def test_search_last_page():  # noqa: D103
