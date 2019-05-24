@@ -2,6 +2,7 @@ import time
 import warnings
 
 import requests
+from requests.compat import urljoin
 
 from .exceptions import (
     DarkSearchJSONDecodeException,
@@ -10,11 +11,6 @@ from .exceptions import (
     DarkSearchRequestException,
     DarkSearchServerError,
 )
-
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
 
 try:
     from json.decoder import JSONDecodeError
@@ -71,9 +67,9 @@ class Client(object):
 
             if response.status_code == 404:
                 raise DarkSearchPageNotFound
-            elif response.status_code == 429:
+            if response.status_code == 429:
                 raise DarkSearchQuotaExceed
-            elif response.status_code == 504:
+            if response.status_code == 504:
                 raise DarkSearchServerError
 
             if json:
