@@ -18,7 +18,7 @@ URL = 'https://github.com/thehappydinoa/DarkSearch'
 EMAIL = 'thehappydinoa@gmail.com'
 AUTHOR = 'thehappydinoa'
 REQUIRES_PYTHON = '>=3.5.0'
-VERSION = '2.0.0'
+VERSION = '2.0.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -27,7 +27,10 @@ REQUIRED = [
 
 # What packages are optional?
 EXTRAS = {
-    'dev': ['twine', 'pytest', 'pytest-console-scripts', 'flake8', 'mypy'],
+    'dev': [
+        'twine', 'flake8', 'mypy', 'pytest',
+        'pytest-console-scripts', 'pytest-httpserver'
+    ],
 }
 
 # The rest you shouldn't have to touch too much :)
@@ -49,8 +52,8 @@ except FileNotFoundError:
 class UploadCommand(Command):
     """Support setup.py upload."""
 
-    description = 'Build and publish the package.'
-    user_options = []
+    description: str = 'Build and publish the package.'
+    user_options: list = []
 
     @staticmethod
     def status(s):

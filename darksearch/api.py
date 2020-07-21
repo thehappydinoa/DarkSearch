@@ -1,6 +1,6 @@
 from time import sleep
 from warnings import warn
-from typing import Any, Iterable, Tuple
+from typing import Iterable
 from json.decoder import JSONDecodeError
 
 import requests

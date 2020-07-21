@@ -1,4 +1,4 @@
-# DarkSearch ![Travis](https://travis-ci.com/thehappydinoa/DarkSearch.svg?branch=master)
+# DarkSearch [![Build Status](https://travis-ci.com/thehappydinoa/DarkSearch.svg?branch=master)](https://travis-ci.com/thehappydinoa/DarkSearch)
 
 Python API wrapper for [darksearch.io](https://darksearch.io/)
 
