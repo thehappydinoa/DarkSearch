@@ -19,7 +19,7 @@ URL = "https://github.com/thehappydinoa/DarkSearch"
 EMAIL = "thehappydinoa@gmail.com"
 AUTHOR = "thehappydinoa"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "2.0.3"
+VERSION = "2.0.4"
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -109,6 +109,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
     # $ setup.py publish support.

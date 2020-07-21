@@ -1,4 +1,4 @@
-# DarkSearch [![Build Status](https://travis-ci.com/thehappydinoa/DarkSearch.svg?branch=master)](https://travis-ci.com/thehappydinoa/DarkSearch)
+# DarkSearch ![PyPI](https://img.shields.io/pypi/v/darksearch) ![Python Version](https://img.shields.io/pypi/pyversions/darksearch) [![Build Status](https://travis-ci.com/thehappydinoa/DarkSearch.svg?branch=master)](https://travis-ci.com/thehappydinoa/DarkSearch) ![License](https://img.shields.io/pypi/l/darksearch)
 
 Python API wrapper for [darksearch.io](https://darksearch.io/)
 
