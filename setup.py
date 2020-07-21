@@ -18,7 +18,7 @@ DESCRIPTION = "Python API wrapper for darksearch.io"
 URL = "https://github.com/thehappydinoa/DarkSearch"
 EMAIL = "thehappydinoa@gmail.com"
 AUTHOR = "thehappydinoa"
-REQUIRES_PYTHON = ">=3.5.0"
+REQUIRES_PYTHON = ">=3.6.0"
 VERSION = "2.0.3"
 
 # What packages are required for this module to be executed?
