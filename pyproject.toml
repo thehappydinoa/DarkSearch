@@ -1,7 +1,10 @@
-[tool.pytest.ini_options]
-testpaths = tests
-script_launch_mode = subprocess
+[build-system]
+requires = ["setuptools", "wheel"]
 
 [tool.black]
 line-length = 100
-target-version = ['py37']
+target-version = ["py37"]
+
+[tool.pytest.ini_options]
+testpaths = tests
+script_launch_mode = subprocess
