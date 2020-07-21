@@ -1,9 +1,6 @@
 [tool.pytest.ini_options]
 testpaths = tests
 script_launch_mode = subprocess
-markers =
-  script_launch_mode: console scripts
-
 
 [tool.black]
 line-length = 100
