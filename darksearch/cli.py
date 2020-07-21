@@ -1,10 +1,11 @@
 import argparse
+from typing import Text
 from pprint import pprint
 
 from .api import Client
 
 
-def encode(source):
+def encode(source: Text):
     """Encode the received string if necessary.
 
     :param source: The given string
@@ -18,7 +19,7 @@ def encode(source):
         return str(source)
 
 
-def print_response(response):
+def print_response(response: dict):
     """Print the response from the API.
 
     :param response: the API response

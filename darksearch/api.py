@@ -1,5 +1,7 @@
-import time
-import warnings
+from time import sleep
+from warnings import warn
+from typing import Any, Iterable, Tuple
+from json.decoder import JSONDecodeError
 
 import requests
 from requests.compat import urljoin
@@ -12,13 +14,8 @@ from .exceptions import (
     DarkSearchServerError,
 )
 
-try:
-    from json.decoder import JSONDecodeError
-except ImportError:
-    JSONDecodeError = ValueError
 
-
-def lookahead(iterable):
+def lookahead(iterable: Iterable):
     """Pass through all values from the given iterable, augmented by the
     information if there are more values to come after the current one
     (True), or if it is the last value (False).
@@ -36,10 +33,10 @@ class Client(object):
 
     def __init__(
         self,
-        base_url="https://darksearch.io",
-        timeout=30,
-        headers=None,
-        proxies=None,
+        base_url: str = "https://darksearch.io",
+        timeout: int = 30,
+        headers: dict = {},
+        proxies: dict = {},
     ):
         """Initialize this client with the given parameters.
 
@@ -57,7 +54,7 @@ class Client(object):
         self.headers = headers
         self.proxies = proxies
 
-    def api_request(self, path, params=None, json=True):
+    def api_request(self, path: str, params: dict = {}, json: bool = True):
         """Perform an API request to DarkSearch.
 
         :param path: Path to be requested
@@ -97,7 +94,7 @@ class Client(object):
             print(response.content)
             raise DarkSearchJSONDecodeException
 
-    def api_search(self, query, page):
+    def api_search(self, query: str, page: int):
         """Perform low level search with the API.
 
         :param query: Query to be searched
@@ -114,7 +111,7 @@ class Client(object):
             "/api/search", params={"query": query, "page": page}
         )
 
-    def search(self, query, **kwargs):
+    def search(self, query: str, **kwargs):
         """Perform search with the API.
 
         :param query: Query to be searched
@@ -141,9 +138,9 @@ class Client(object):
                     if response.get("last_page") <= page_i + 1:
                         break
                     if wait and has_more:
-                        time.sleep(wait)
+                        sleep(wait)
             except DarkSearchQuotaExceed:
-                warnings.warn(
+                warn(
                     "Seach Quota Exceeded, please keep searches to less than "
                     "30 per minute"
                 )
@@ -152,7 +149,7 @@ class Client(object):
             page = 1
         return self.api_search(query, page)
 
-    def crawling_status(self):
+    def crawling_status(self) -> int:
         """Return the number of indexed pages in DarkSearch.
 
         :return: crawling_status
