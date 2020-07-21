@@ -11,9 +11,7 @@ class Dork(object):
         self.dorks = dorks
 
     def __str__(self):
-        return "{0} {1}".format(
-            str(self.query), self.parse_dorks(self.dorks)
-        ).strip()
+        return "{0} {1}".format(str(self.query), self.parse_dorks(self.dorks)).strip()
 
     def combine_dorks(self, other):
         new_dorks = dict()

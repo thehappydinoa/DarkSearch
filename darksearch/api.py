@@ -107,9 +107,7 @@ class Client(object):
 
         if page < 1:
             page = 1
-        return self.api_request(
-            "/api/search", params={"query": query, "page": page}
-        )
+        return self.api_request("/api/search", params={"query": query, "page": page})
 
     def search(self, query: str, **kwargs):
         """Perform search with the API.

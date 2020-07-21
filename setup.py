@@ -18,7 +18,7 @@ URL = 'https://github.com/thehappydinoa/DarkSearch'
 EMAIL = 'thehappydinoa@gmail.com'
 AUTHOR = 'thehappydinoa'
 REQUIRES_PYTHON = '>=3.5.0'
-VERSION = '2.0.1'
+VERSION = '2.0.2'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

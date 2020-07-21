@@ -1,22 +1,7 @@
-import argparse
-from typing import Text
+from argparse import ArgumentParser
 from pprint import pprint
 
 from .api import Client
-
-
-def encode(source: Text):
-    """Encode the received string if necessary.
-
-    :param source: The given string
-    :type source: str
-    :rtype: str
-    """
-    try:
-        if isinstance(source, unicode):
-            return source.encode("utf8")
-    except NameError:
-        return str(source)
 
 
 def print_response(response: dict):
@@ -31,22 +16,21 @@ def print_response(response: dict):
     print("Per Page: {}".format(response.get("per_page")))
     print("Last Page: {}\n".format(response.get("last_page")))
     print("Results: ")
-    for result in response.get("data"):
-        print("Title: {}".format(encode(result.get("title"))))
-        print("Description: {}".format(encode(result.get("description"))))
+    data = response.get("data", [])
+    for result in data:
+        print("Title: {}".format(result.get("title")))
+        print("Description: {}".format(result.get("description")))
         print("Link: {}\n".format(result.get("link")))
 
 
 def main():
     """Execute this command line."""
-    parser = argparse.ArgumentParser(description="DarkSearch API Client")
+    parser = ArgumentParser(description="DarkSearch API Client")
     parser.add_argument("-q", "--query", help="search query")
     parser.add_argument("-p", "--page", type=int, help="page number")
     parser.add_argument("-n", "--pages", type=int, help="number of pages")
     parser.add_argument("-w", "--wait", type=int, help="wait between requests")
-    parser.add_argument(
-        "-j", "--json", action="store_true", help="prints as json"
-    )
+    parser.add_argument("-j", "--json", action="store_true", help="prints as json")
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="prints verbose json"
     )
