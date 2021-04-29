@@ -2,6 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/darksearch?color=orange&logo=pypi&logoColor=orange)](https://pypi.org/project/darksearch/)
 [![Python Version](https://img.shields.io/badge/python-3.6%2B-blue?logo=python)](https://www.python.org/downloads/)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/thehappydinoa/DarkSearch/test?label=tests)](https://github.com/thehappydinoa/DarkSearch/actions)
 [![License](https://img.shields.io/github/license/thehappydinoa/DarkSearch)](LICENSE)
 
 Python API wrapper for DarkSearch ([darksearch.io](https://darksearch.io/)).
