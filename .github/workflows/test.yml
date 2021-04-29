@@ -60,4 +60,3 @@ jobs:
           # The GitHub editor is 127 chars wide
           flake8 --max-line-length=127
           mypy darksearch
-          black darksearch --check
