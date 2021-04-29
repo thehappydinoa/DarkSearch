@@ -1,4 +1,5 @@
-# flake8: noqa
-from darksearch.api import *
-from darksearch.dork import *
-from darksearch.exceptions import *
+from .api import Client
+from .dork import Dork
+from .exceptions import DarkSearchException
+
+__all__ = ["Client", "Dork", "DarkSearchException"]

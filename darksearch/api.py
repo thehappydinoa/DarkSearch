@@ -2,9 +2,9 @@ from time import sleep
 from warnings import warn
 from typing import Iterable
 from json.decoder import JSONDecodeError
+from urllib.parse import urljoin
 
 import requests
-from requests.compat import urljoin
 
 from .exceptions import (
     DarkSearchJSONDecodeException,
@@ -139,7 +139,7 @@ class Client(object):
                         sleep(wait)
             except DarkSearchQuotaExceed:
                 warn(
-                    "Seach Quota Exceeded, please keep searches to less than "
+                    "Search Quota Exceeded, please keep searches to less than "
                     "30 per minute"
                 )
             return results
@@ -147,7 +147,7 @@ class Client(object):
             page = 1
         return self.api_search(query, page)
 
-    def crawling_status(self) -> int:
+    def crawling_status(self):
         """Return the number of indexed pages in DarkSearch.
 
         :return: crawling_status

@@ -1,11 +1,46 @@
-[build-system]
-requires = ["setuptools", "wheel"]
+[tool.poetry]
+name = "darksearch"
+version = "2.1.0.b0"
+description = "Python API wrapper for DarkSearch (darksearch.io)."
+authors = ["Aidan Holland <thehappydinoa@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/thehappydinoa/DarkSearch"
+classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
 
-[tool.black]
-line-length = 100
-target-version = ["py37"]
+[tool.poetry.scripts]
+darksearch = "darksearch.cli:main"
+
+[tool.poetry.urls]
+"Issue Tracker" = "https://github.com/thehappydinoa/DarkSearch/issues"
+
+[tool.poetry.dependencies]
+python = ">=3.6.0"
+requests = "^2.25"
+
+[tool.poetry.dev-dependencies]
+flake8 = {version = "^3.9",allows-prereleases = true}
+mypy = {version = "^0.812.0",allows-prereleases = true}
+black = {version = "^18.3-alpha.0",allows-prereleases = true}
+pytest = {version = "^6.2",allows-prereleases = true}
+pytest-console-scripts = {version = "^1.2",allows-prereleases = true}
+pytest-httpserver = {version = "^1.0",allows-prereleases = true}
 
 [tool.pytest.ini_options]
 minversion = "4.0"
 script_launch_mode = "subprocess"
 testpaths = "tests"
+addopts = "-p no:warnings"
+
+[build-system]
+requires = ["setuptools", "poetry>=0.12"]
+build-backend = "poetry.masonry.api"
