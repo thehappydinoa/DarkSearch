@@ -1,6 +1,10 @@
-# DarkSearch ![PyPI](https://img.shields.io/pypi/v/darksearch) ![Python Version](https://img.shields.io/pypi/pyversions/darksearch) [![Build Status](https://travis-ci.com/thehappydinoa/DarkSearch.svg?branch=master)](https://travis-ci.com/thehappydinoa/DarkSearch) ![License](https://img.shields.io/pypi/l/darksearch)
+# DarkSearch
 
-Python API wrapper for [darksearch.io](https://darksearch.io/)
+[![PyPI](https://img.shields.io/pypi/v/darksearch?color=orange&logo=pypi&logoColor=orange)](https://pypi.org/project/darksearch/)
+[![Python Version](https://img.shields.io/badge/python-3.6%2B-blue?logo=python)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/github/license/thehappydinoa/DarkSearch)](LICENSE)
+
+Python API wrapper for DarkSearch ([darksearch.io](https://darksearch.io/)).
 
 ## Install
 
@@ -36,9 +40,9 @@ import darksearch
  }
  """
 
- client = darksearch.Client(timeout=30, headers=None, proxies=None)
+client = darksearch.Client(timeout=30, headers=None, proxies=None)
 
- results = client.search("query")
+results = client.search("query")
 
  """
  `results` is a JSON dict object like this
@@ -59,7 +63,7 @@ import darksearch
 }
  """
 
- results = client.search("query", page=2)
+results = client.search("query", page=2)
 
  """
  `results` is a JSON dict object like this
@@ -80,7 +84,7 @@ import darksearch
 }
  """
 
- results = client.search("query", pages=2)
+results = client.search("query", pages=2)
 
  """
  `results` is a list of JSON dict objects like this
@@ -104,7 +108,7 @@ import darksearch
  ]
  """
 
- results = client.search("query", pages=2, wait=2)
+results = client.search("query", pages=2, wait=2)
 
  """
  `wait` is the seconds between requests (DarkSearch's API is limited to 30 requests per minute.)
@@ -129,7 +133,7 @@ import darksearch
  ]
  """
 
- crawling_status = darksearch.crawling_status()
+crawling_status = darksearch.crawling_status()
 
  """
  `crawling_status` is a integer of pages that have been indexed
