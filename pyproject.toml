@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "darksearch"
-version = "2.1.0.b0"
+version = "2.1.0"
 description = "Python API wrapper for DarkSearch (darksearch.io)."
 authors = ["Aidan Holland <thehappydinoa@gmail.com>"]
 license = "MIT"
@@ -14,6 +14,7 @@ classifiers = [
   "Programming Language :: Python :: 3.6",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 
@@ -28,12 +29,12 @@ python = ">=3.6.0"
 requests = "^2.25"
 
 [tool.poetry.dev-dependencies]
-flake8 = {version = "^3.9",allows-prereleases = true}
-mypy = {version = "^0.812.0",allows-prereleases = true}
-black = {version = "^20.8b1",allows-prereleases = true}
-pytest = {version = "^6.2",allows-prereleases = true}
-pytest-console-scripts = {version = "^1.2",allows-prereleases = true}
-pytest-httpserver = {version = "^1.0",allows-prereleases = true}
+flake8 = {version = "^3.9"}
+mypy = {version = "^0.812.0"}
+black = {version = "^20.8b1",allow-prereleases = true}
+pytest = {version = "^6.2"}
+pytest-console-scripts = {version = "^1.2"}
+pytest-httpserver = {version = "^1.0"}
 
 [tool.pytest.ini_options]
 minversion = "4.0"
