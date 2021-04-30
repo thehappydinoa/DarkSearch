@@ -7,7 +7,17 @@ license = "MIT"
 readme = "README.md"
 repository = "https://github.com/thehappydinoa/DarkSearch"
 classifiers = [
+  "Typing :: Typed",
+  "Topic :: Internet",
+  "Topic :: Documentation :: Sphinx",
+  "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+  "Framework :: Pytest",
+  "Framework :: Flake8",
+  "Environment :: Console",
+  "Natural Language :: English",
   "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Development Status :: 5 - Production/Stable",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
@@ -23,6 +33,7 @@ darksearch = "darksearch.cli:main"
 
 [tool.poetry.urls]
 "Issue Tracker" = "https://github.com/thehappydinoa/DarkSearch/issues"
+"Documentation" = "https://darksearch.readthedocs.io/"
 
 [tool.poetry.dependencies]
 python = ">=3.6.0"
