@@ -1,6 +1,6 @@
 from time import sleep
 from warnings import warn
-from typing import Iterable
+from typing import Iterable, Optional
 from json.decoder import JSONDecodeError
 from urllib.parse import urljoin
 
@@ -28,15 +28,15 @@ def lookahead(iterable: Iterable):
     yield last, False
 
 
-class Client(object):
-    """Client object for DarkSearch API."""
+class Client:
+    """Client Class for DarkSearch API."""
 
     def __init__(
         self,
         base_url: str = "https://darksearch.io",
         timeout: int = 30,
-        headers: dict = {},
-        proxies: dict = {},
+        headers: Optional[dict] = None,
+        proxies: Optional[dict] = None,
     ):
         """Initialize this client with the given parameters.
 
@@ -54,7 +54,7 @@ class Client(object):
         self.headers = headers
         self.proxies = proxies
 
-    def api_request(self, path: str, params: dict = {}, json: bool = True):
+    def api_request(self, path: str, params: Optional[dict] = None, json: bool = True):
         """Perform an API request to DarkSearch.
 
         :param path: Path to be requested
@@ -109,7 +109,13 @@ class Client(object):
             page = 1
         return self.api_request("/api/search", params={"query": query, "page": page})
 
-    def search(self, query: str, **kwargs):
+    def search(
+        self,
+        query: str,
+        page: Optional[int] = None,
+        pages: Optional[int] = None,
+        wait: Optional[int] = None,
+    ):
         """Perform search with the API.
 
         :param query: Query to be searched
@@ -123,9 +129,6 @@ class Client(object):
         :return: search results
         :rtype: list or dict
         """
-        page = kwargs.get("page")
-        pages = kwargs.get("pages")
-        wait = kwargs.get("wait")
 
         if pages and not page:
             results = list()
