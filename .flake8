@@ -8,6 +8,7 @@ exclude =
   # This contains our built documentation
   build,
   # This contains builds of flake8 that we don't want to check
-  dist
+  dist,
+  docs
 max-line-length = 88
 extend-ignore = E203, W503

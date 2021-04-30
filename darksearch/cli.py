@@ -23,8 +23,8 @@ def print_response(response: dict):
         print("Link: {}\n".format(result.get("link")))
 
 
-def main():
-    """Execute this command line."""
+def get_parser():
+    """Returns ArgumentParser"""
     parser = ArgumentParser(description="DarkSearch API Client")
     parser.add_argument("-q", "--query", help="search query")
     parser.add_argument("-p", "--page", type=int, help="page number")
@@ -34,6 +34,12 @@ def main():
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="prints verbose json"
     )
+    return parser
+
+
+def main():
+    """Execute this command line."""
+    parser = get_parser()
     args = parser.parse_args()
 
     if not args.query:
