@@ -5,7 +5,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/thehappydinoa/DarkSearch/test?label=tests)](https://github.com/thehappydinoa/DarkSearch/actions)
 [![License](https://img.shields.io/github/license/thehappydinoa/DarkSearch)](LICENSE)
 
-Python API wrapper for DarkSearch ([darksearch.io](https://darksearch.io/)).
+Python API wrapper for DarkSearch ([darksearch.io](https://darksearch.io/)). Python 3.6+ is currently supported.
 
 ## Install
 
@@ -143,8 +143,23 @@ crawling_status = darksearch.crawling_status()
 
 [Proxies Documentation](https://requests.readthedocs.io/en/master/user/advanced/#proxies)
 
+## Contributing
+
+All contributions (no matter how small) are always welcome.
+
+## Development
+
+```bash
+git clone git@github.com:thehappydinoa/DarkSearch.git
+poetry install --dev
+```
+
 ## Testing
 
 ```bash
 pytest
 ```
+
+## License
+
+This software is licensed under [MIT](LICENSE)
