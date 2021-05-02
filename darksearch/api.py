@@ -79,7 +79,7 @@ class Client:
                 raise DarkSearchPageNotFound
             if response.status_code == 429:
                 raise DarkSearchQuotaExceed
-            if response.status_code == 504:
+            if response.status_code >= 500:
                 raise DarkSearchServerError
 
             if json:
@@ -87,11 +87,10 @@ class Client:
 
             return response.content
 
-        except requests.exceptions.RequestException:
-            raise DarkSearchRequestException
+        except requests.exceptions.RequestException as error:
+            raise DarkSearchRequestException from error
 
         except JSONDecodeError:
-            print(response.content)
             raise DarkSearchJSONDecodeException
 
     def api_search(self, query: str, page: int):

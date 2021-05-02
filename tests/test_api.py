@@ -1,9 +1,15 @@
 import datetime
 from unittest import TestCase
 
+import pytest
 from pytest_httpserver import HTTPServer
 
 from darksearch import Client
+from darksearch.exceptions import (
+    DarkSearchPageNotFound,
+    DarkSearchQuotaExceed,
+    DarkSearchServerError,
+)
 
 
 def _setup_all(server: HTTPServer):
@@ -19,6 +25,26 @@ def _setup_all(server: HTTPServer):
         "/api/search",
         query_string="query=super_specific_search_page_no_one_will_create_1234&page=1",
     ).respond_with_json({"current_page": 1, "last_page": 0})
+
+    server.expect_request(
+        "/api/search",
+        query_string="query=page_not_found_test&page=1",
+    ).respond_with_json({"current_page": 1, "last_page": 0}, status=404)
+
+    server.expect_request(
+        "/api/search",
+        query_string="query=quota_exceed_test&page=1",
+    ).respond_with_json({"current_page": 1, "last_page": 0}, status=429)
+
+    server.expect_request(
+        "/api/search",
+        query_string="query=page_server_error_test_1&page=1",
+    ).respond_with_json({"current_page": 1, "last_page": 0}, status=501)
+
+    server.expect_request(
+        "/api/search",
+        query_string="query=page_server_error_test_2&page=1",
+    ).respond_with_json({"current_page": 1, "last_page": 0}, status=504)
 
     server.expect_request("/api/crawling_status").respond_with_data(str(1_090_214))
 
@@ -77,6 +103,27 @@ class TestApi(TestCase):
         )
         assert isinstance(response, list)
         assert len(response) == 1
+
+    def test_negative_search_page(self):
+        response = self.client.search("query", page=-1)
+        assert isinstance(response, dict)
+        assert response.get("current_page") == 1
+
+    def test_page_not_found(self):
+        with pytest.raises(DarkSearchPageNotFound):
+            self.client.search("page_not_found_test", page=1)
+
+    def test_quota_exceed(self):
+        with pytest.raises(DarkSearchQuotaExceed):
+            self.client.search("quota_exceed_test", page=1)
+
+    def test_server_error_1(self):
+        with pytest.raises(DarkSearchServerError):
+            self.client.search("page_server_error_test_1", page=1)
+
+    def test_server_error_2(self):
+        with pytest.raises(DarkSearchServerError):
+            self.client.search("page_server_error_test_2", page=1)
 
     def test_crawling_status(self):
         response = self.client.crawling_status()
