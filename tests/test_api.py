@@ -9,6 +9,7 @@ from darksearch.exceptions import (
     DarkSearchPageNotFound,
     DarkSearchQuotaExceed,
     DarkSearchServerError,
+    DarkSearchJSONDecodeException,
 )
 
 
@@ -45,6 +46,10 @@ def _setup_all(server: HTTPServer):
         "/api/search",
         query_string="query=page_server_error_test_2&page=1",
     ).respond_with_json({"current_page": 1, "last_page": 0}, status=504)
+
+    server.expect_request("/not_json").respond_with_data(
+        "<definitely not json>", status=200
+    )
 
     server.expect_request("/api/crawling_status").respond_with_data(str(1_090_214))
 
@@ -124,6 +129,10 @@ class TestApi(TestCase):
     def test_server_error_2(self):
         with pytest.raises(DarkSearchServerError):
             self.client.search("page_server_error_test_2", page=1)
+
+    def test_json_decode(self):
+        with pytest.raises(DarkSearchJSONDecodeException):
+            self.client.api_request("/not_json")
 
     def test_crawling_status(self):
         response = self.client.crawling_status()
