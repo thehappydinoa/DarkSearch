@@ -41,7 +41,7 @@ requests = "^2.25"
 
 [tool.poetry.dev-dependencies]
 flake8 = {version = "^3.9"}
-mypy = {version = "^0.812.0"}
+mypy = {version = "^0.901"}
 black = {version = "^20.8b1",allow-prereleases = true}
 pytest = {version = "^6.2"}
 pytest-console-scripts = {version = "^1.2"}
