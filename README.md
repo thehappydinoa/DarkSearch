@@ -26,13 +26,20 @@ All contributions (no matter how small) are always welcome.
 
 ```bash
 git clone git@github.com:thehappydinoa/DarkSearch.git
-poetry install --dev
+poetry install
 ```
 
 ## Testing
 
 ```bash
 pytest
+```
+
+## Publishing
+
+```bash
+poetry build
+poetry publish
 ```
 
 ## License
