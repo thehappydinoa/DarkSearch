@@ -13,47 +13,6 @@ from darksearch.exceptions import (
 )
 
 
-def _setup_all(server: HTTPServer):
-    server.expect_request(
-        "/api/search", query_string="query=query&page=1"
-    ).respond_with_json({"current_page": 1, "last_page": 5})
-
-    server.expect_request(
-        "/api/search", query_string="query=query&page=2"
-    ).respond_with_json({"current_page": 2, "last_page": 5})
-
-    server.expect_request(
-        "/api/search",
-        query_string="query=super_specific_search_page_no_one_will_create_1234&page=1",
-    ).respond_with_json({"current_page": 1, "last_page": 0})
-
-    server.expect_request(
-        "/api/search",
-        query_string="query=page_not_found_test&page=1",
-    ).respond_with_json({"current_page": 1, "last_page": 0}, status=404)
-
-    server.expect_request(
-        "/api/search",
-        query_string="query=quota_exceed_test&page=1",
-    ).respond_with_json({"current_page": 1, "last_page": 0}, status=429)
-
-    server.expect_request(
-        "/api/search",
-        query_string="query=page_server_error_test_1&page=1",
-    ).respond_with_json({"current_page": 1, "last_page": 0}, status=501)
-
-    server.expect_request(
-        "/api/search",
-        query_string="query=page_server_error_test_2&page=1",
-    ).respond_with_json({"current_page": 1, "last_page": 0}, status=504)
-
-    server.expect_request("/not_json").respond_with_data(
-        "<definitely not json>", status=200
-    )
-
-    server.expect_request("/api/crawling_status").respond_with_data(str(1_090_214))
-
-
 class TestApi(TestCase):
     port = 4000
     base_url = f"http://localhost:{port}"
@@ -61,7 +20,49 @@ class TestApi(TestCase):
     def setUp(self):
         super().setUp()
         self.httpserver = HTTPServer("127.0.0.1", self.port)
-        _setup_all(self.httpserver)
+
+        self.httpserver.expect_request(
+            "/api/search", query_string="query=query&page=1"
+        ).respond_with_json({"current_page": 1, "last_page": 5})
+
+        self.httpserver.expect_request(
+            "/api/search", query_string="query=query&page=2"
+        ).respond_with_json({"current_page": 2, "last_page": 5})
+
+        self.httpserver.expect_request(
+            "/api/search",
+            query_string="query=super_specific_search_page_no_one_will_create_1234"
+            + "&page=1",
+        ).respond_with_json({"current_page": 1, "last_page": 0})
+
+        self.httpserver.expect_request(
+            "/api/search",
+            query_string="query=page_not_found_test&page=1",
+        ).respond_with_json({"current_page": 1, "last_page": 0}, status=404)
+
+        self.httpserver.expect_request(
+            "/api/search",
+            query_string="query=quota_exceed_test&page=1",
+        ).respond_with_json({"current_page": 1, "last_page": 0}, status=429)
+
+        self.httpserver.expect_request(
+            "/api/search",
+            query_string="query=page_server_error_test_1&page=1",
+        ).respond_with_json({"current_page": 1, "last_page": 0}, status=501)
+
+        self.httpserver.expect_request(
+            "/api/search",
+            query_string="query=page_server_error_test_2&page=1",
+        ).respond_with_json({"current_page": 1, "last_page": 0}, status=504)
+
+        self.httpserver.expect_request("/not_json").respond_with_data(
+            "<definitely not json>", status=200
+        )
+
+        self.httpserver.expect_request("/api/crawling_status").respond_with_data(
+            str(1_090_214)
+        )
+
         self.httpserver.start()
         self.addCleanup(self.httpserver.stop)
 

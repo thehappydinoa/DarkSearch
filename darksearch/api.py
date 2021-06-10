@@ -14,6 +14,8 @@ from .exceptions import (
     DarkSearchServerError,
 )
 
+BASE_URL = "https://darksearch.io"
+
 
 def lookahead(iterable: Iterable):
     """Pass through all values from the given iterable, augmented by the
@@ -33,7 +35,7 @@ class Client:
 
     def __init__(
         self,
-        base_url: str = "https://darksearch.io",
+        base_url: str = BASE_URL,
         timeout: int = 30,
         headers: Optional[dict] = None,
         proxies: Optional[dict] = None,
