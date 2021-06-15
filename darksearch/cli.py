@@ -1,32 +1,43 @@
 from argparse import ArgumentParser
 from pprint import pprint
+from typing import List
+
+from rich import print
+from rich.markdown import Markdown
+from rich.panel import Panel
+from rich.text import Text
+from rich.tree import Tree
 
 from .api import Client
 
 
-def print_response(response: dict):
+def print_response(responses: List[dict]):
     """Print the response from the API.
 
     :param response: the API response
     :type response: dict
     """
-    print("Current Page: {}\n".format(response.get("current_page")))
-    print("From: {}".format(response.get("from")))
-    print("To: {}".format(response.get("to")))
-    print("Per Page: {}".format(response.get("per_page")))
-    print("Last Page: {}\n".format(response.get("last_page")))
-    print("Results: ")
-    data = response.get("data", [])
-    for result in data:
-        print("Title: {}".format(result.get("title")))
-        print("Description: {}".format(result.get("description")))
-        print("Link: {}\n".format(result.get("link")))
+    for response in responses:
+        page_tree = Tree("Page {}\n".format(response.get("current_page")))
+        page_tree.add("From: {}".format(response.get("from")))
+        page_tree.add("To: {}".format(response.get("to")))
+        page_tree.add("Per Page: {}".format(response.get("per_page")))
+        page_tree.add("Last Page: {}\n".format(response.get("last_page")))
+        results_tree = page_tree.add("Results")
+        for result in response.get("data", []):
+            result_branch = results_tree.add(Text(result.get("title"), "purple"))
+            description_branch = result_branch.add("📜 Description")
+            description_branch.add(Panel(Markdown(result.get("description"))))
+            link_branch = result_branch.add("🔗 Link")
+            link_branch.add(result.get("link"))
+
+    print(results_tree)
 
 
 def get_parser():
     """Returns ArgumentParser"""
     parser = ArgumentParser(description="DarkSearch API Client")
-    parser.add_argument("-q", "--query", help="search query")
+    parser.add_argument("query", help="search query")
     parser.add_argument("-p", "--page", type=int, help="page number")
     parser.add_argument("-n", "--pages", type=int, help="number of pages")
     parser.add_argument("-w", "--wait", type=int, help="wait between requests")
@@ -53,16 +64,14 @@ def main():
     )
 
     if args.json:
-        if args.verbose:
-            print(response)
-        else:
-            pprint(response)
+        print_func = print
+        if not args.verbose:
+            print_func = pprint
+        print_func(response)
     else:
-        if isinstance(response, list):
-            for resp in response:
-                print_response(resp)
-        else:
-            print_response(response)
+        if not isinstance(response, list):
+            response = [response]
+        print_response(response)
 
 
 if __name__ == "__main__":

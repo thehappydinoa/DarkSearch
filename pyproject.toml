@@ -36,25 +36,34 @@ darksearch = "darksearch.cli:main"
 "Documentation" = "https://darksearch.readthedocs.io/"
 
 [tool.poetry.dependencies]
-python = ">=3.6.0,<4"
+python = ">=3.6.1,<4"
+
 requests = "^2.25"
+rich = "^10.3.0"
 types-requests = "^0.1.9"
 
 [tool.poetry.dev-dependencies]
-flake8 = {version = "^3.9"}
-mypy = {version = "^0.902"}
 black = {version = "^20.8b1",allow-prereleases = true}
+flake8 = {version = "^3.9"}
+flake8-isort = "^4.0.0"
+flake8-simplify = "^0.14.1"
+isort = "^5.8.0"
+mypy = {version = "^0.902"}
 pytest = {version = "^6.2"}
 pytest-console-scripts = {version = "^1.2"}
-pytest-httpserver = {version = "^1.0"}
-coverage = "^5.5"
 pytest-cov = "^2.12.1"
+pytest-httpserver = {version = "^1.0"}
 
 [tool.pytest.ini_options]
 minversion = "4.0"
 script_launch_mode = "subprocess"
 testpaths = "tests"
 addopts = "--cov -p no:warnings"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
 
 [build-system]
 requires = ["setuptools", "poetry>=0.12"]

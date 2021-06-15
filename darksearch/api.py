@@ -1,8 +1,8 @@
-from time import sleep
-from warnings import warn
-from typing import Iterable, Optional
 from json.decoder import JSONDecodeError
+from time import sleep
+from typing import Iterable, Optional, Union
 from urllib.parse import urljoin
+from warnings import warn
 
 import requests
 
@@ -13,6 +13,7 @@ from .exceptions import (
     DarkSearchRequestException,
     DarkSearchServerError,
 )
+from .query import Query
 
 BASE_URL = "https://darksearch.io"
 
@@ -112,7 +113,7 @@ class Client:
 
     def search(
         self,
-        query: str,
+        query: Union[str, Query],
         page: Optional[int] = None,
         pages: Optional[int] = None,
         wait: Optional[int] = None,
@@ -123,7 +124,7 @@ class Client:
         :param page: Page number of the search
         :param pages: Pages to be returned
         :param wait: Time to wait between requests
-        :type query: str
+        :type query: str | Query
         :type page: int
         :type pages: int
         :type wait: int
@@ -131,6 +132,11 @@ class Client:
         :rtype: list or dict
         """
 
+        # Converts Query object to string
+        if isinstance(query, Query):
+            query = str(query)
+
+        # Multiple pages
         if pages and not page:
             results = list()
             try:
@@ -149,6 +155,8 @@ class Client:
             return results
         if not page:
             page = 1
+
+        # Single page
         return self.api_search(query, page)
 
     def crawling_status(self):

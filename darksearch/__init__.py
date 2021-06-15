@@ -1,4 +1,5 @@
 from .api import Client
-from .dork import Dork
+from .exceptions import DarkSearchException
+from .query import Query
 
-__all__ = ["Client", "Dork"]
+__all__ = ["Client", "Query", "DarkSearchException"]

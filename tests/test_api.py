@@ -6,11 +6,12 @@ from pytest_httpserver import HTTPServer
 
 from darksearch import Client
 from darksearch.exceptions import (
+    DarkSearchJSONDecodeException,
     DarkSearchPageNotFound,
     DarkSearchQuotaExceed,
     DarkSearchServerError,
-    DarkSearchJSONDecodeException,
 )
+from darksearch.query import Query
 
 
 class TestApi(TestCase):
@@ -62,6 +63,9 @@ class TestApi(TestCase):
         self.httpserver.expect_request("/api/crawling_status").respond_with_data(
             str(1_090_214)
         )
+        self.httpserver.expect_request(
+            "/api/search", query_string="query=test+AND+%22exact+string%22&page=1"
+        ).respond_with_json({"current_page": 1, "last_page": 5})
 
         self.httpserver.start()
         self.addCleanup(self.httpserver.stop)
@@ -138,3 +142,15 @@ class TestApi(TestCase):
     def test_crawling_status(self):
         response = self.client.crawling_status()
         assert isinstance(response, int)
+
+    def test_query(self):
+        response = self.client.search(Query("test").and_("exact string", exact=True))
+
+        assert isinstance(response, dict)
+        assert response.get("current_page") == 1
+
+
+if __name__ == "__main__":
+    from unittest import main
+
+    main()
