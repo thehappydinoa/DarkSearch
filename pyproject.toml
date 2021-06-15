@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "darksearch"
-version = "2.1.2.beta1"
+version = "2.1.2"
 description = "Python API wrapper for DarkSearch (darksearch.io)."
 authors = ["Aidan Holland <thehappydinoa@gmail.com>"]
 license = "MIT"
