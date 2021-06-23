@@ -48,7 +48,7 @@ flake8 = {version = "^3.9"}
 flake8-isort = "^4.0.0"
 flake8-simplify = "^0.14.1"
 isort = "^5.9.1"
-mypy = {version = "^0.902"}
+mypy = {version = "^0.910"}
 pytest = {version = "^6.2"}
 pytest-console-scripts = {version = "^1.2"}
 pytest-cov = "^2.12.1"
