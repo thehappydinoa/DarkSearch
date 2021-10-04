@@ -51,7 +51,7 @@ isort = "^5.9.3"
 mypy = {version = "^0.910"}
 pytest = {version = "^6.2"}
 pytest-console-scripts = {version = "^1.2"}
-pytest-cov = "^2.12.1"
+pytest-cov = "^3.0.0"
 pytest-httpserver = {version = "^1.0"}
 
 [tool.pytest.ini_options]
