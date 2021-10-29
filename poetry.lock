@@ -391,17 +391,17 @@ testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtuale
 
 [[package]]
 name = "pytest-httpserver"
-version = "1.0.1"
+version = "1.0.2"
 description = "pytest-httpserver is a httpserver for pytest"
 category = "dev"
 optional = false
-python-versions = ">=3.4"
+python-versions = ">=3.6"
 
 [package.dependencies]
 werkzeug = "*"
 
 [package.extras]
-dev = ["flake8", "wheel", "pytest", "pytest-cov", "coverage", "ipdb", "requests", "sphinx", "sphinx-rtd-theme", "reno", "autopep8"]
+dev = ["flake8", "wheel", "pytest", "pytest-cov", "coverage", "ipdb", "requests", "sphinx", "sphinx-rtd-theme", "reno", "autopep8", "mypy"]
 test = ["pytest", "pytest-cov", "coverage", "requests"]
 
 [[package]]
@@ -733,8 +733,8 @@ pytest-cov = [
     {file = "pytest_cov-3.0.0-py3-none-any.whl", hash = "sha256:578d5d15ac4a25e5f961c938b85a05b09fdaae9deef3bb6de9a6e766622ca7a6"},
 ]
 pytest-httpserver = [
-    {file = "pytest_httpserver-1.0.1-py3-none-any.whl", hash = "sha256:3b2663b539849a2e5bd7d7f380a99b19c4650e154581af699ad6431b5424cacc"},
-    {file = "pytest_httpserver-1.0.1.tar.gz", hash = "sha256:e359c5722ce2bd3bb68f4606f57d5c846e52bf7c748a70de4a3097bb91006089"},
+    {file = "pytest_httpserver-1.0.2-py3-none-any.whl", hash = "sha256:6d2be45b784125d5e1788689bc2239426b59ff9896cad7fa826d2c3912416f4b"},
+    {file = "pytest_httpserver-1.0.2.tar.gz", hash = "sha256:2701fd1d9814d58551f9d1044db335c6ba9873169366c58349523a58cf74ed40"},
 ]
 regex = [
     {file = "regex-2021.4.4-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:619d71c59a78b84d7f18891fe914446d07edd48dc8328c8e149cbe0929b4e000"},
