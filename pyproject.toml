@@ -45,7 +45,7 @@ types-requests = ">=0.1.9,<2.26.0"
 [tool.poetry.dev-dependencies]
 black = {version = "^20.8b1",allow-prereleases = true}
 flake8 = {version = "^3.9"}
-flake8-isort = "^4.0.0"
+flake8-isort = "^4.1.1"
 flake8-simplify = "^0.14.2"
 isort = "^5.9.3"
 mypy = {version = "^0.910"}
