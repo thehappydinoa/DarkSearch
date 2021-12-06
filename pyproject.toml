@@ -43,7 +43,7 @@ rich = "^10.15.1"
 types-requests = "^2.26.1"
 
 [tool.poetry.dev-dependencies]
-black = "^21.11b1"
+black = "^21.12b0"
 flake8 = {version = "^4.0"}
 flake8-isort = "^4.1.1"
 flake8-simplify = "^0.14.2"
