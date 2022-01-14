@@ -377,7 +377,7 @@ testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xm
 
 [[package]]
 name = "pytest-console-scripts"
-version = "1.2.1"
+version = "1.2.2"
 description = "Pytest plugin for testing console scripts"
 category = "dev"
 optional = false
@@ -744,7 +744,7 @@ pytest = [
     {file = "pytest-6.2.5.tar.gz", hash = "sha256:131b36680866a76e6781d13f101efb86cf674ebb9762eb70d3082b6f29889e89"},
 ]
 pytest-console-scripts = [
-    {file = "pytest-console-scripts-1.2.1.tar.gz", hash = "sha256:c7f258025110f1337c23499c2f6674b873d4adba2438be55895edf01451c5ce3"},
+    {file = "pytest-console-scripts-1.2.2.tar.gz", hash = "sha256:caeaaaf57f3a99e4482127e8a18467a1cfd49c92f4b37e5578d0bc40bf1b3394"},
 ]
 pytest-cov = [
     {file = "pytest-cov-3.0.0.tar.gz", hash = "sha256:e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470"},
