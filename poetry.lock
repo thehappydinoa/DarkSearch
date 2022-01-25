@@ -420,7 +420,7 @@ doc = ["reno", "sphinx", "sphinx-rtd-theme"]
 
 [[package]]
 name = "requests"
-version = "2.26.0"
+version = "2.27.1"
 description = "Python HTTP for Humans."
 category = "main"
 optional = false
@@ -766,8 +766,8 @@ pytest-httpserver = [
     {file = "pytest_httpserver-1.0.3.tar.gz", hash = "sha256:87561c4fa6a7bc306d76d1979a3eb9d54eb26bfb2f3f51f1643bf3c090ce629d"},
 ]
 requests = [
-    {file = "requests-2.26.0-py2.py3-none-any.whl", hash = "sha256:6c1246513ecd5ecd4528a0906f910e8f0f9c6b8ec72030dc9fd154dc1a6efd24"},
-    {file = "requests-2.26.0.tar.gz", hash = "sha256:b8aa58f8cf793ffd8782d3d8cb19e66ef36f7aba4353eec859e74678b01b07a7"},
+    {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
+    {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
 ]
 rich = [
     {file = "rich-11.0.0-py3-none-any.whl", hash = "sha256:d7a8086aa1fa7e817e3bba544eee4fd82047ef59036313147759c11475f0dafd"},
